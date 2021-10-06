@@ -7,10 +7,18 @@ export default class DataView extends JetView{
 		return {
 			rows: [
 				{
-					view:"tabbar", id:'tabbar',
-					multiview: true, options: [
-						{ value: 'Countries', id: 'tabCountries'},
-						{ value: 'Statuses', id: 'tabStatuses'}
+					view: "tabbar",
+					id: 'tabbar',
+					multiview: true,
+					options: [
+						{
+							value: 'Countries',
+							id: 'tabCountries'
+						},
+						{
+							value: 'Statuses',
+							id: 'tabStatuses'
+						}
 					]
 				},
 				{
@@ -19,37 +27,53 @@ export default class DataView extends JetView{
 							id: "tabCountries",
 							cols: [
 								{
-									gravity:3,
-									id:"tableCountries",
-									view:"datatable",
-									editable:true,
+									gravity: 3,
+									id: "tableCountries",
+									view: "datatable",
+									editable: true,
 									scrollX: false,
 									select: false,
 									columns: [
-										{ id: "Name", fillspace: true, editor:"text"},
-										{ id: "del", header: "", template: "<span class='on_click_delete webix_icon wxi-trash'></span>" },
+										{
+											id: "Name",
+											fillspace: true,
+											editor:"text"
+										},
+										{
+											id: "del",
+											header: "",
+											template: "<span class='on_click_delete webix_icon wxi-trash'></span>"
+										},
 									],
 									onClick: {
-										"on_click_delete": function(e, id) {
+										"on_click_delete"(e, id) {
 											this.remove(id);
 											return false;
 										}
 									},
 								},
 								{
-									view:"form", id: "formForCountries",
-									elements:[
-										{ view:"text", label:"Country", name:"Name"},
-										{ margin:20, cols:[
-											{
-												view:"button",
-												value:"Add",
-												css: "webix_primary",
-												click() {
-													$$("formForCountries").save()
+									view: "form",
+									id: "formForCountries",
+									elements: [
+										{
+											view: "text",
+											label: "Country",
+											name: "Name"
+										},
+										{
+											margin: 20,
+											cols: [
+												{
+													view: "button",
+													value: "Add",
+													css: "webix_primary",
+													click() {
+														$$("formForCountries").save()
+													}
 												}
-											}
-										]},
+											]
+										},
 										{}
 									]
 								}
@@ -60,38 +84,61 @@ export default class DataView extends JetView{
 							cols: [
 								{
 									gravity:3,
-									id:"tableStatuses",
-									view:"datatable",
-									editable:true,
+									id: "tableStatuses",
+									view: "datatable",
+									editable: true,
 									scrollX: false,
 									select: false,
 									columns: [
-										{ id: "Name", editor:"text"},
-										{ id: "Icon", fillspace: true, editor:"text"},
-										{ id: "del", header: "", template: "<span class='on_click_delete webix_icon wxi-trash'></span>" },
+										{
+											id: "Name",
+											editor: "text"
+										},
+										{
+											id: "Icon",
+											fillspace: true,
+											editor: "text"
+										},
+										{
+											id: "del",
+											header: "",
+											template: "<span class='on_click_delete webix_icon wxi-trash'></span>"
+										},
 									],
 									onClick: {
-										"on_click_delete": function(e, id) {
+										"on_click_delete"(e, id) {
 											this.remove(id);
 											return false;
 										}
 									},
 								},
 								{
-									view:"form", id: "formForStatuses",
-									elements:[
-										{ view:"text", label:"Name", name:"Name"},
-										{ view:"text", label:"Icon", name:"Icon"},
-										{ margin:20, cols:[
-											{
-												view:"button",
-												value:"Add",
-												css: "webix_primary",
-												click() {
-													$$("formForStatuses").save()
+									view: "form",
+									id: "formForStatuses",
+									elements: [
+										{
+											view: "text",
+											label: "Name",
+											name: "Name"
+										},
+										{ 
+											view: "text",
+											label: "Icon",
+											name: "Icon"
+										},
+										{
+											margin: 20,
+											cols: [
+												{
+													view: "button",
+													value: "Add",
+													css: "webix_primary",
+													click() {
+														$$("formForStatuses").save()
+													}
 												}
-											}
-										]},
+											]
+										},
 										{}
 									]
 								}
