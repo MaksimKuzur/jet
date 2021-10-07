@@ -1,16 +1,15 @@
+
 import {JetView, plugins} from "webix-jet";
 
-
-
-export default class TopView extends JetView{
+export default class TopView extends JetView {
 	config() {
-		var header = {
+		const header = {
 			type: "header",
 			template: this.app.config.name,
 			css: "webix_header app_header"
 		};
 
-		var menu = {
+		const menu = {
 			view: "menu",
 			id: "top:menu", 
 			css: "app_menu",
@@ -22,7 +21,8 @@ export default class TopView extends JetView{
 				{
 					value: "Contacts",
 					id: "start",
-					icon: "wxi-columns" },
+					icon: "wxi-columns"
+				},
 				{
 					value: "Data",
 					id: "data",
@@ -36,7 +36,7 @@ export default class TopView extends JetView{
 			]
 		};
 
-		var ui = {
+		const ui = {
 			type: "clean",
 			paddingX: 5,
 			css: "app_layout",
@@ -47,19 +47,27 @@ export default class TopView extends JetView{
 					rows: [
 						{
 							css: "webix_shadow_medium",
-							rows: [header, menu]
+							rows: [
+								header,
+								menu
+							]
 						}
 					]
 				},
-				{ type:"wide", paddingY:10, paddingX:5, rows:[
-					{ $subview:true } 
-				]}
+				{
+					type: "wide",
+					paddingY: 10,
+					paddingX: 5,
+					rows: [
+						{ $subview: true } 
+					]
+				}
 			]
 		};
 
 		return ui;
 	}
-	init(){
+	init() {
 		this.use(plugins.Menu, "top:menu");
 	}
 }

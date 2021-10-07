@@ -8,7 +8,7 @@ export default class StartView extends JetView{
 			cols: [
 				{
 					view: "list",
-					id: "listContacts",
+					localId: "listContacts",
 					template: "#id#. #Name#, #Email#, status #Status#, country #Country#"
 				},
 				{
