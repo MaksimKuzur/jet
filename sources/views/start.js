@@ -61,6 +61,9 @@ export default class StartView extends JetView{
 		}
 	}
 	init() {
-		this.$$("listContacts").parse(contacts);
+		this.$getListContacts().parse(contacts);
+	}
+	$getListContacts() {
+		return this.$$("listContacts");
 	}
 }

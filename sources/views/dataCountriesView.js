@@ -61,7 +61,13 @@ export default class DataCountriesView extends JetView {
 		}
 	}
 	init() {
-		this.$$("tableCountries").parse(countries);
-		this.$$("formForCountries").bind(this.$$("tableCountries"));
+		this.$getTableCountries().parse(countries);
+		this.$getformForCountries().bind(this.$getTableCountries());
+	}
+	$getTableCountries() {
+		return this.$$("tableCountries");
+	}
+	$getformForCountries() {
+		return this.$$("formForCountries");
 	}
 }

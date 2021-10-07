@@ -1,23 +1,30 @@
-export default {
-	rows: [
-		{
-			type: "section",
-			template: "Language"
-		},
-		{
-			view: "segmented",
-			inputWidth: 200,
-			options: [
+
+import {JetView} from "webix-jet";
+
+export default class SettingsView extends JetView {
+	config() {
+		return {
+			rows: [
 				{
-					id: "en",
-					value: "English"
+					type: "section",
+					template: "Language"
 				},
 				{
-					id: "ru",
-					value: "Russian"
+					view: "segmented",
+					inputWidth: 200,
+					options: [
+						{
+							id: "en",
+							value: "English"
+						},
+						{
+							id: "ru",
+							value: "Russian"
+						},
+					]
 				},
+				{}
 			]
-		},
-		{}
-	]
-};
+		};
+	}
+}
