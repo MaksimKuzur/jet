@@ -1,4 +1,5 @@
-export const contacts = [
+export const contactsCollection = new webix.DataCollection({ data: [
 	{ "id": 1, "Name": "Alex Wanny", "Email": "alex@gmail.com", "Status": 1, "Country": 2 },
-	{ "id": 2, "Name": "Doris Wan", "Email": "doris@gmail.com", "Status": 1, "Country": 3 }
-];
+	{ "id": 2, "Name": "Doris Wan", "Email": "doris@gmail.com", "Status": 2, "Country": 3 },
+	{ "id": 3, "Name": "Gudvin Bedge", "Email": "gudvin@gmail.com", "Status": 1, "Country": 3 }
+]});

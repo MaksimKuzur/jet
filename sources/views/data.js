@@ -5,6 +5,7 @@ import DataStatusesView from "views/dataStatusesView";
 
 export default class DataView extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			rows: [
 				{
@@ -12,12 +13,12 @@ export default class DataView extends JetView {
 					multiview: true,
 					options: [
 						{
-							value: 'Countries',
-							id: 'tabCountries'
+							value: _("Countries"),
+							id: "tabCountries"
 						},
 						{
-							value: 'Statuses',
-							id: 'tabStatuses'
+							value: _("Statuses"),
+							id: "tabStatuses"
 						}
 					]
 				},
