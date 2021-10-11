@@ -15,7 +15,7 @@ export default class FormForListContactsView extends JetView {
 					view: "text",
 					label: _("Name"),
 					name: "Name",
-					placeholder: "Type here.."
+					placeholder: _("Type here..")
 				},
 				{
 					view: "text",
@@ -44,7 +44,7 @@ export default class FormForListContactsView extends JetView {
 							width: 200,
 							align: "right",
 							click:() => {
-								const listContactItemValues = this.getRoot().getValues();
+								const listContactItemValues = this.$getFormValues();
 								this.app.callEvent("onListContactItemUpdate", [listContactItemValues]);
 							}
 						}
@@ -54,9 +54,18 @@ export default class FormForListContactsView extends JetView {
 			]
 		}
 	}
+
+	$getForm() {
+		return this.$$("formForListContacts");
+	}
+
+	$getFormValues() {
+		return this.$getForm().getValues();
+	}
+	
 	ready() {
 		this.on(this.app, "listContactItemSelect", (listContactItem) => {
-		this.$$("formForListContacts").setValues(listContactItem);
+		this.$getForm().setValues(listContactItem);
 		});
 	}
 }

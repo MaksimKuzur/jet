@@ -1,9 +1,22 @@
 export default {
-	"Readonly": "Readonly",
-	"FirstApp": "My First App",
-
-	"Language": "Language",
-	"Settings": "Settings",
+	"App": "App",
+	"Contacts": "Contacts",
 	"Data": "Data",
-	"Start": "Start"
+	"Settings": "Settings",
+	"Add contact": "Add contact",
+	"Add": "Add",
+	"Name": "Name",
+	"Status": "Status",
+	"Country": "Country",
+	"Update": "Update",
+	'Countries': "Countries",
+	'Statuses': "Statuses",
+	"Icon": "Icon",
+	"Language": "Language",
+	"English": "English",
+	"Russian": "Russian",
+	"Settings" :  "Settings",
+	"Type here..": "Type here..",
+	"status": "status",
+	"country": "country",
 };

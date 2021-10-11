@@ -72,13 +72,16 @@ export default class DataStatusesView extends JetView {
 			]
 		}
 	}
+
 	init() {
 		this.$getTableStatuses().parse(statuses);
 		this.$getFormForStatuses().bind(this.$getTableStatuses());
 	}
+
 	$getTableStatuses() {
 		return this.$$("tableStatuses");
 	}
+	
 	$getFormForStatuses() {
 		return this.$$("formForStatuses");
 	}
