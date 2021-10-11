@@ -1,4 +1,4 @@
-export const statuses = [
-	{ "id": 1, "value": "Busy", "Icon": "cogs" },
-	{ "id": 2, "value": "Open", "Icon": "user" }
-];
+export const statusesCollection = new webix.DataCollection({
+	url:"data/statuses.json",
+	save:"data/statuses.json"
+});

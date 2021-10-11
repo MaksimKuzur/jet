@@ -1,6 +1,6 @@
 
 import {JetView} from "webix-jet";
-import {countries} from "models/countries";
+import {countriesCollection} from "models/countries";
 
 export default class DataCountriesView extends JetView {
 	config() {
@@ -63,7 +63,7 @@ export default class DataCountriesView extends JetView {
 		}
 	}
 	init() {
-		this.$getTableCountries().parse(countries);
+		this.$getTableCountries().parse(countriesCollection);
 		this.$getFormForCountries().bind(this.$getTableCountries());
 	}
 	$getTableCountries() {

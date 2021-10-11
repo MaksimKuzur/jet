@@ -1,7 +1,7 @@
 
 import {JetView} from "webix-jet";
-import {statuses} from "models/statuses";
-import {countries} from "models/countries";
+import {statusesCollection} from "models/statuses";
+import {countriesCollection} from "models/countries";
 
 
 export default class FormForListContactsView extends JetView {
@@ -26,13 +26,13 @@ export default class FormForListContactsView extends JetView {
 					view: "combo",
 					label: _("Status"),
 					name: "Status",
-					options: statuses
+					options: statusesCollection
 				}, 
 				{
 					view: "combo",
 					label: _("Country"),
 					name: "Country",
-					options: countries
+					options: countriesCollection
 				},
 				{
 					margin: 20,

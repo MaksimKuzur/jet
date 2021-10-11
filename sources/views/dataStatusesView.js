@@ -1,6 +1,6 @@
 
 import {JetView} from "webix-jet";
-import {statuses} from "models/statuses";
+import {statusesCollection} from "models/statuses";
 
 export default class DataStatusesView extends JetView {
 	config() {
@@ -73,7 +73,7 @@ export default class DataStatusesView extends JetView {
 		}
 	}
 	init() {
-		this.$getTableStatuses().parse(statuses);
+		this.$getTableStatuses().parse(statusesCollection);
 		this.$getFormForStatuses().bind(this.$getTableStatuses());
 	}
 	$getTableStatuses() {
