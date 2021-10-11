@@ -59,7 +59,7 @@ export default class StartView extends JetView{
 		return this.$$("listContacts");
 	}
 	ready() {
-		this.$getListContacts().select(1);
+		// this.$getListContacts().select(1);
 		this.on(this.app, "onListContactItemUpdate", (listContactItemValues) => {
 			var selectedListContactItem = this.$getListContacts().getSelectedId();
 			contactsCollection.updateItem(selectedListContactItem, listContactItemValues);

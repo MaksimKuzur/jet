@@ -65,7 +65,7 @@ module.exports = function(env) {
 			stats:"errors-only",
 			proxy: {
 				"/server": {
-					target: 'http://localhost:8080',
+					target: 'http://localhost:8096',
 					pathRewrite: {"^/server" : ""}
 				}
 			}

@@ -26,13 +26,23 @@ export default class FormForListContactsView extends JetView {
 					view: "combo",
 					label: _("Status"),
 					name: "Status",
-					options: statusesCollection
+					options: {
+						body: {
+							template: "#Name#",
+							data: statusesCollection
+						}
+					}
 				}, 
 				{
 					view: "combo",
 					label: _("Country"),
 					name: "Country",
-					options: countriesCollection
+					options: {
+						body: {
+							template: "#Name#",
+							data: countriesCollection
+						}
+					}
 				},
 				{
 					margin: 20,

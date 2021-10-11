@@ -1,4 +1,4 @@
 export const contactsCollection = new webix.DataCollection({
-	url:"data/contacts.json",
-	save:"data/contacts.json"
+	url:"/server/api/v1/contacts/",
+	save:"/server/api/v1/contacts/"
 });

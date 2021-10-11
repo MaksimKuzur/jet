@@ -16,7 +16,7 @@ export default class DataStatusesView extends JetView {
 					select: false,
 					columns: [
 						{
-							id: "value",
+							id: "Name",
 							header: _("Status"),
 							editor: "text"
 						},
@@ -46,7 +46,7 @@ export default class DataStatusesView extends JetView {
 						{
 							view: "text",
 							label: _("Name"),
-							name: "value"
+							name: "Name"
 						},
 						{ 
 							view: "text",

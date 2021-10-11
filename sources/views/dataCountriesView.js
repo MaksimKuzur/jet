@@ -16,7 +16,7 @@ export default class DataCountriesView extends JetView {
 					select: false,
 					columns: [
 						{
-							id: "value",
+							id: "Name",
 							header: _("Country"),
 							fillspace: true,
 							editor: "text"
@@ -41,7 +41,7 @@ export default class DataCountriesView extends JetView {
 						{
 							view: "text",
 							label: _("Country"),
-							name: "value"
+							name: "Name"
 						},
 						{
 							margin: 20,

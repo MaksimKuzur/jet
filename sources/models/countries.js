@@ -1,4 +1,4 @@
 export const countriesCollection = new webix.DataCollection({
-	url:"data/countries.json",
-	save:"data/countries.json"
+	url:"/server/api/v1/countries/",
+	save:"/server/api/v1/countries/"
 });
