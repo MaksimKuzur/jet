@@ -65,7 +65,10 @@ export default class FormForListContactsView extends JetView {
 	
 	ready() {
 		this.on(this.app, "listContactItemSelect", (listContactItem) => {
-		this.$getForm().setValues(listContactItem);
+			this.$getForm().setValues(listContactItem);
+		});
+		this.on(this.app, "clearFormForListContacts", () => {
+			this.$getForm().clear();
 		});
 	}
 }

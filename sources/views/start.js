@@ -14,12 +14,14 @@ export default class StartView extends JetView{
 							view: "list",
 							localId: "listContacts",
 							select: true,
-							template: "#id#. #Name#, #Email#, " + _("status") + " #Status#, " + _("country") + " #Country# <span class='on_click_delete webix_icon wxi-close'></span>",
+							template: `#id#. #Name#, #Email#, ${_("status")} #Status#, ${_("country")} #Country# <span class='on_click_delete webix_icon wxi-close'></span>`,
 							onClick: {
-								on_click_delete(e, id) {
+								on_click_delete: (e, id) => {
 									contactsCollection.remove(id);
+									this.app.callEvent("clearFormForListContacts");
+									this.app.show("/top/start");
 									return false;
-								}
+								},
 							},
 							on: {
 								onAfterSelect: (row) => {
@@ -70,7 +72,6 @@ export default class StartView extends JetView{
 	}
 
 	ready() {
-		this.$getListContacts().select(1);
 		this.on(this.app, "onListContactItemUpdate", (listContactItemValues) => {
 			const selectedListContactItem = this.$getListContacts().getSelectedId();
 			contactsCollection.updateItem(selectedListContactItem, listContactItemValues);
@@ -79,7 +80,12 @@ export default class StartView extends JetView{
 			this.show(`start?id=${id}`)
 		);
 		const contactId = this.getParam("id");
-		if (contactId)
+		if (contactId) {
 			this.$getListContacts().select(contactId);
+		}
+		else {
+			const firstContactId = this.$getListContacts().getFirstId();
+			this.$getListContacts().select(firstContactId);
+		}
 	}
 }

@@ -35,13 +35,17 @@ export default class SettingsView extends JetView {
 		};
 	}
 
-	$getSegmentedLocaleValue() {
-		return this.$$("segmentedLocale").getValue();
+	$getSegmentedView() {
+		return this.$$("segmentedLocale");
+	}
+
+	getSegmentedViewValue() {
+		return this.$getSegmentedView().getValue();
 	}
 
 	toggleLanguage(){
 		const langs = this.app.getService("locale");
-		const value = this.$getSegmentedLocaleValue();
+		const value = this.getSegmentedViewValue();
 		langs.setLang(value);
 	}
 }
