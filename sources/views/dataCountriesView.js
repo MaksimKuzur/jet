@@ -4,6 +4,7 @@ import {countries} from "models/countries";
 
 export default class DataCountriesView extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			cols: [
 				{
@@ -15,7 +16,8 @@ export default class DataCountriesView extends JetView {
 					select: false,
 					columns: [
 						{
-							id: "Name",
+							id: "value",
+							header: _("Country"),
 							fillspace: true,
 							editor: "text"
 						},
@@ -38,15 +40,15 @@ export default class DataCountriesView extends JetView {
 					elements: [
 						{
 							view: "text",
-							label: "Country",
-							name: "Name"
+							label: _("Country"),
+							name: "value"
 						},
 						{
 							margin: 20,
 							cols: [
 								{
 									view: "button",
-									value: "Add",
+									value: _("Add"),
 									css: "webix_primary",
 									click() {
 										this.getFormView().save()
@@ -60,14 +62,17 @@ export default class DataCountriesView extends JetView {
 			]
 		}
 	}
+
 	init() {
 		this.$getTableCountries().parse(countries);
-		this.$getformForCountries().bind(this.$getTableCountries());
+		this.$getFormForCountries().bind(this.$getTableCountries());
 	}
+
 	$getTableCountries() {
 		return this.$$("tableCountries");
 	}
-	$getformForCountries() {
+	
+	$getFormForCountries() {
 		return this.$$("formForCountries");
 	}
 }

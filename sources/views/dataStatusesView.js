@@ -4,6 +4,7 @@ import {statuses} from "models/statuses";
 
 export default class DataStatusesView extends JetView {
 	config() {
+		const _ = this.app.getService("locale")._;
 		return {
 			cols: [
 				{
@@ -15,11 +16,13 @@ export default class DataStatusesView extends JetView {
 					select: false,
 					columns: [
 						{
-							id: "Name",
+							id: "value",
+							header: _("Status"),
 							editor: "text"
 						},
 						{
 							id: "Icon",
+							header: _("Icon"),
 							fillspace: true,
 							editor: "text"
 						},
@@ -42,12 +45,12 @@ export default class DataStatusesView extends JetView {
 					elements: [
 						{
 							view: "text",
-							label: "Name",
-							name: "Name"
+							label: _("Name"),
+							name: "value"
 						},
 						{ 
 							view: "text",
-							label: "Icon",
+							label: _("Icon"),
 							name: "Icon"
 						},
 						{
@@ -69,13 +72,16 @@ export default class DataStatusesView extends JetView {
 			]
 		}
 	}
+
 	init() {
 		this.$getTableStatuses().parse(statuses);
 		this.$getFormForStatuses().bind(this.$getTableStatuses());
 	}
+
 	$getTableStatuses() {
 		return this.$$("tableStatuses");
 	}
+	
 	$getFormForStatuses() {
 		return this.$$("formForStatuses");
 	}
