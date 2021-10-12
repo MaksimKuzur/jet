@@ -14,12 +14,14 @@ export default class StartView extends JetView{
 							view: "list",
 							localId: "listContacts",
 							select: true,
-							template: "#id#. #Name#, #Email#, status #Status#, country #Country# <span class='on_click_delete webix_icon wxi-close'></span>",
+							template: `#id#. #Name#, #Email#, ${_("status")} #Status#, ${_("country")} #Country# <span class='on_click_delete webix_icon wxi-close'></span>`,
 							onClick: {
-								on_click_delete(e, id) {
+								on_click_delete: (e, id) => {
 									contactsCollection.remove(id);
+									this.app.callEvent("clearFormForListContacts");
+									this.app.show("/top/start");
 									return false;
-								}
+								},
 							},
 							on: {
 								onAfterSelect: (row) => {
@@ -37,9 +39,17 @@ export default class StartView extends JetView{
 									width: 200,
 									align: "right",
 									click:() => {
-										let idNewListContactItem = this.$getListContacts().count();
+										let idNewListContactItem = contactsCollection.getLastId();
 										idNewListContactItem++;
-										contactsCollection.add({id: idNewListContactItem, Name: "New name", Email: "New Email", Status: "New status", Country: "New country", });
+										contactsCollection.add(
+											{ 
+												id: idNewListContactItem,
+												Name: "New name",
+												Email: "New Email",
+												Status: "New status",
+												Country: "New country",
+											}
+										);
 										this.$getListContacts().select(idNewListContactItem);
 									}
 								},
@@ -52,22 +62,33 @@ export default class StartView extends JetView{
 			]
 		}
 	}
+
 	init() {
 		this.$getListContacts().sync(contactsCollection);
 	}
+
 	$getListContacts() {
 		return this.$$("listContacts");
 	}
+
 	ready() {
-		// this.$getListContacts().select(1);
 		this.on(this.app, "onListContactItemUpdate", (listContactItemValues) => {
-			var selectedListContactItem = this.$getListContacts().getSelectedId();
+			const selectedListContactItem = this.$getListContacts().getSelectedId();
 			contactsCollection.updateItem(selectedListContactItem, listContactItemValues);
 		});
 		this.on(this.$getListContacts(), "onAfterSelect", id =>
 			this.show(`start?id=${id}`)
 		);
-		if (this.getParam("id"))
-			this.$getListContacts().select(this.getParam("id"));
+		this.on(contactsCollection, "onAfterLoad", () => {
+			const contactId = this.getParam("id");
+			if (contactId) {
+				this.$getListContacts().select(contactId);
+			}
+			else {
+				const firstContactId = this.$getListContacts().getFirstId();
+				this.$getListContacts().select(firstContactId);
+			}
+		})
+		
 	}
 }

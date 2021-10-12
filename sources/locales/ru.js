@@ -15,6 +15,7 @@ export default {
 	"Language": "Язык",
 	"English": "Английский",
 	"Russian": "Русский",
-	"Settings" :  "Настройки",
-	"Data" :  "Данные",
+	"Type here..": "Заполни поле..",
+	"status": "статус",
+	"country": "страна",
 };

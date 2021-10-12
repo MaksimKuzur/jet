@@ -60,8 +60,9 @@ export default class DataStatusesView extends JetView {
 									view: "button",
 									value: "Add",
 									css: "webix_primary",
-									click() {
-										this.getFormView().save()
+									click:() => {
+										const statusesItemValues = this.getFormForStatusesValues();
+										statusesCollection.add(statusesItemValues);
 									}
 								}
 							]
@@ -72,14 +73,21 @@ export default class DataStatusesView extends JetView {
 			]
 		}
 	}
+
 	init() {
-		this.$getTableStatuses().parse(statusesCollection);
+		this.$getTableStatuses().sync(statusesCollection);
 		this.$getFormForStatuses().bind(this.$getTableStatuses());
 	}
+
 	$getTableStatuses() {
 		return this.$$("tableStatuses");
 	}
+
 	$getFormForStatuses() {
 		return this.$$("formForStatuses");
+	}
+
+	getFormForStatusesValues() {
+		return this.$getFormForStatuses().getValues();
 	}
 }

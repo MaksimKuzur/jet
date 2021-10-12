@@ -15,6 +15,7 @@ export default class SettingsView extends JetView {
 				},
 				{
 					view: "segmented",
+					localId: "segmentedLocale",
 					inputWidth: 200,
 					options: [
 						{
@@ -33,9 +34,18 @@ export default class SettingsView extends JetView {
 			]
 		};
 	}
+
+	$getSegmentedView() {
+		return this.$$("segmentedLocale");
+	}
+
+	getSegmentedViewValue() {
+		return this.$getSegmentedView().getValue();
+	}
+
 	toggleLanguage(){
 		const langs = this.app.getService("locale");
-		const value = this.getRoot().queryView({ view:"segmented" }).getValue();
+		const value = this.getSegmentedViewValue();
 		langs.setLang(value);
 	}
 }

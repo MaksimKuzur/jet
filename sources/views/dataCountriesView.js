@@ -50,8 +50,9 @@ export default class DataCountriesView extends JetView {
 									view: "button",
 									value: _("Add"),
 									css: "webix_primary",
-									click() {
-										this.getFormView().save()
+									click:() => {
+										const countriesItemValues = this.getFormForCountriesValues();
+										countriesCollection.add(countriesItemValues);
 									}
 								}
 							]
@@ -62,14 +63,21 @@ export default class DataCountriesView extends JetView {
 			]
 		}
 	}
+
 	init() {
-		this.$getTableCountries().parse(countriesCollection);
+		this.$getTableCountries().sync(countriesCollection);
 		this.$getFormForCountries().bind(this.$getTableCountries());
 	}
+
 	$getTableCountries() {
 		return this.$$("tableCountries");
 	}
+	
 	$getFormForCountries() {
 		return this.$$("formForCountries");
+	}
+
+	getFormForCountriesValues() {
+		return this.$getFormForCountries().getValues();
 	}
 }
