@@ -28,10 +28,10 @@ export default class DataCountriesView extends JetView {
 						},
 					],
 					onClick: {
-						on_click_delete(e, id) {
-							this.remove(id);
+						on_click_delete: (e, id) => {
+							countriesCollection.remove(id);
 							return false;
-						}
+						},
 					},
 				},
 				{
@@ -66,7 +66,6 @@ export default class DataCountriesView extends JetView {
 
 	init() {
 		this.$getTableCountries().sync(countriesCollection);
-		this.$getFormForCountries().bind(this.$getTableCountries());
 	}
 
 	$getTableCountries() {

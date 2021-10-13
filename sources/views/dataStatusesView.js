@@ -33,10 +33,10 @@ export default class DataStatusesView extends JetView {
 						},
 					],
 					onClick: {
-						on_click_delete(e, id) {
-							this.remove(id);
+						on_click_delete: (e, id) => {
+							statusesCollection.remove(id);
 							return false;
-						}
+						},
 					},
 				},
 				{
@@ -76,7 +76,6 @@ export default class DataStatusesView extends JetView {
 
 	init() {
 		this.$getTableStatuses().sync(statusesCollection);
-		this.$getFormForStatuses().bind(this.$getTableStatuses());
 	}
 
 	$getTableStatuses() {
