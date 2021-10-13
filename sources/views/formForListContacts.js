@@ -1,7 +1,7 @@
 
 import {JetView} from "webix-jet";
-import {statuses} from "models/statuses";
-import {countries} from "models/countries";
+import {statusesCollection} from "models/statuses";
+import {countriesCollection} from "models/countries";
 
 
 export default class FormForListContactsView extends JetView {
@@ -26,13 +26,23 @@ export default class FormForListContactsView extends JetView {
 					view: "combo",
 					label: _("Status"),
 					name: "Status",
-					options: statuses
+					options: {
+						body: {
+							template: "#Name#",
+							data: statusesCollection
+						}
+					}
 				}, 
 				{
 					view: "combo",
 					label: _("Country"),
 					name: "Country",
-					options: countries
+					options: {
+						body: {
+							template: "#Name#",
+							data: countriesCollection
+						}
+					}
 				},
 				{
 					margin: 20,
@@ -44,7 +54,7 @@ export default class FormForListContactsView extends JetView {
 							width: 200,
 							align: "right",
 							click:() => {
-								const listContactItemValues = this.$getFormValues();
+								const listContactItemValues = this.getFormValues();
 								this.app.callEvent("onListContactItemUpdate", [listContactItemValues]);
 							}
 						}
@@ -59,7 +69,7 @@ export default class FormForListContactsView extends JetView {
 		return this.$$("formForListContacts");
 	}
 
-	$getFormValues() {
+	getFormValues() {
 		return this.$getForm().getValues();
 	}
 	

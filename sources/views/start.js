@@ -18,8 +18,11 @@ export default class StartView extends JetView{
 							onClick: {
 								on_click_delete: (e, id) => {
 									contactsCollection.remove(id);
-									this.app.callEvent("clearFormForListContacts");
-									this.app.show("/top/start");
+									const urlParam = this.getParam("id");
+									if (urlParam == id) {
+										this.app.callEvent("clearFormForListContacts");
+										this.app.show("/top/start");
+									}
 									return false;
 								},
 							},
@@ -27,6 +30,7 @@ export default class StartView extends JetView{
 								onAfterSelect: (row) => {
 									const listContactItem = this.$getListContacts().getItem(row);
 									this.app.callEvent("listContactItemSelect", [listContactItem]);
+									
 								}
 							}
 						},
@@ -39,18 +43,18 @@ export default class StartView extends JetView{
 									width: 200,
 									align: "right",
 									click:() => {
-										let idNewListContactItem = this.$getListContacts().count();
-										idNewListContactItem++;
-										contactsCollection.add(
+										contactsCollection.waitSave(function() {
+											contactsCollection.add(
 											{ 
-												id: idNewListContactItem,
 												Name: "New name",
 												Email: "New Email",
 												Status: "New status",
 												Country: "New country",
-											}
+											},
 										);
-										this.$getListContacts().select(idNewListContactItem);
+										}).then((obj) => {
+											this.$getListContacts().select(obj.id);
+										});
 									}
 								},
 								{}
@@ -74,18 +78,22 @@ export default class StartView extends JetView{
 	ready() {
 		this.on(this.app, "onListContactItemUpdate", (listContactItemValues) => {
 			const selectedListContactItem = this.$getListContacts().getSelectedId();
-			contactsCollection.updateItem(selectedListContactItem, listContactItemValues);
+			if (this.$getListContacts().getSelectedId()) {
+				contactsCollection.updateItem(selectedListContactItem, listContactItemValues);
+			}
 		});
 		this.on(this.$getListContacts(), "onAfterSelect", id =>
 			this.show(`start?id=${id}`)
 		);
-		const contactId = this.getParam("id");
-		if (contactId) {
-			this.$getListContacts().select(contactId);
-		}
-		else {
-			const firstContactId = this.$getListContacts().getFirstId();
-			this.$getListContacts().select(firstContactId);
-		}
+		contactsCollection.waitData.then(() => {
+			const contactId = this.getParam("id");
+			if (contactId) {
+				this.$getListContacts().select(contactId);
+			}
+			else {
+				const firstContactId = this.$getListContacts().getFirstId();
+				this.$getListContacts().select(firstContactId);
+			}
+		});
 	}
 }

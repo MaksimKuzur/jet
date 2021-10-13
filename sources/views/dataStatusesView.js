@@ -1,6 +1,6 @@
 
 import {JetView} from "webix-jet";
-import {statuses} from "models/statuses";
+import {statusesCollection} from "models/statuses";
 
 export default class DataStatusesView extends JetView {
 	config() {
@@ -16,7 +16,7 @@ export default class DataStatusesView extends JetView {
 					select: false,
 					columns: [
 						{
-							id: "value",
+							id: "Name",
 							header: _("Status"),
 							editor: "text"
 						},
@@ -33,10 +33,10 @@ export default class DataStatusesView extends JetView {
 						},
 					],
 					onClick: {
-						on_click_delete(e, id) {
-							this.remove(id);
+						on_click_delete: (e, id) => {
+							statusesCollection.remove(id);
 							return false;
-						}
+						},
 					},
 				},
 				{
@@ -46,7 +46,7 @@ export default class DataStatusesView extends JetView {
 						{
 							view: "text",
 							label: _("Name"),
-							name: "value"
+							name: "Name"
 						},
 						{ 
 							view: "text",
@@ -60,8 +60,9 @@ export default class DataStatusesView extends JetView {
 									view: "button",
 									value: "Add",
 									css: "webix_primary",
-									click() {
-										this.getFormView().save()
+									click:() => {
+										const statusesItemValues = this.getFormForStatusesValues();
+										statusesCollection.add(statusesItemValues);
 									}
 								}
 							]
@@ -74,15 +75,18 @@ export default class DataStatusesView extends JetView {
 	}
 
 	init() {
-		this.$getTableStatuses().parse(statuses);
-		this.$getFormForStatuses().bind(this.$getTableStatuses());
+		this.$getTableStatuses().sync(statusesCollection);
 	}
 
 	$getTableStatuses() {
 		return this.$$("tableStatuses");
 	}
-	
+
 	$getFormForStatuses() {
 		return this.$$("formForStatuses");
+	}
+
+	getFormForStatusesValues() {
+		return this.$getFormForStatuses().getValues();
 	}
 }

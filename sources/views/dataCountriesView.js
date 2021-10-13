@@ -1,6 +1,6 @@
 
 import {JetView} from "webix-jet";
-import {countries} from "models/countries";
+import {countriesCollection} from "models/countries";
 
 export default class DataCountriesView extends JetView {
 	config() {
@@ -16,7 +16,7 @@ export default class DataCountriesView extends JetView {
 					select: false,
 					columns: [
 						{
-							id: "value",
+							id: "Name",
 							header: _("Country"),
 							fillspace: true,
 							editor: "text"
@@ -28,10 +28,10 @@ export default class DataCountriesView extends JetView {
 						},
 					],
 					onClick: {
-						on_click_delete(e, id) {
-							this.remove(id);
+						on_click_delete: (e, id) => {
+							countriesCollection.remove(id);
 							return false;
-						}
+						},
 					},
 				},
 				{
@@ -41,7 +41,7 @@ export default class DataCountriesView extends JetView {
 						{
 							view: "text",
 							label: _("Country"),
-							name: "value"
+							name: "Name"
 						},
 						{
 							margin: 20,
@@ -50,8 +50,9 @@ export default class DataCountriesView extends JetView {
 									view: "button",
 									value: _("Add"),
 									css: "webix_primary",
-									click() {
-										this.getFormView().save()
+									click:() => {
+										const countriesItemValues = this.getFormForCountriesValues();
+										countriesCollection.add(countriesItemValues);
 									}
 								}
 							]
@@ -64,8 +65,7 @@ export default class DataCountriesView extends JetView {
 	}
 
 	init() {
-		this.$getTableCountries().parse(countries);
-		this.$getFormForCountries().bind(this.$getTableCountries());
+		this.$getTableCountries().sync(countriesCollection);
 	}
 
 	$getTableCountries() {
@@ -74,5 +74,9 @@ export default class DataCountriesView extends JetView {
 	
 	$getFormForCountries() {
 		return this.$$("formForCountries");
+	}
+
+	getFormForCountriesValues() {
+		return this.$getFormForCountries().getValues();
 	}
 }

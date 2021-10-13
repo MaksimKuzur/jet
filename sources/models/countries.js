@@ -1,5 +1,4 @@
-export const countries = [
-	{ "id": 1, "value": "USA"},
-	{ "id": 2, "value": "Canada"},
-	{ "id": 3, "value": "Italy"}
-];
+export const countriesCollection = new webix.DataCollection({
+	url:"/server/api/v1/countries/",
+	save:"rest->/server/api/v1/countries/"
+});
