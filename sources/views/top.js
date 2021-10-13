@@ -68,6 +68,7 @@ export default class TopView extends JetView {
 
 		return ui;
 	}
+	
 	init() {
 		this.use(plugins.Menu, "topMenu");
 	}
